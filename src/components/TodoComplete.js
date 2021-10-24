@@ -1,24 +1,28 @@
 import React from "react"
 import { useDispatch } from "react-redux"
 import { toggleComplete } from "../redux/todoSlice"
+import ModalTodo from "./ModalTodo"
 
-const TodoComplete = ({ id, title, status }) => {
+const TodoComplete = ({ data }) => {
 	const dispatch = useDispatch()
 	const handleCompleteClick = () => {
 		dispatch(
 			toggleComplete({
-				id: id,
+				id: data.id,
 				status: 0,
 			})
 		)
 	}
 	return (
-		<li className="list-group-item list-group-item-success">
-			<div className="d-flex justify-content-between">
-				<span className="d-flex align-items-center">
-					<input type="checkbox" className="mr-3" checked onChange={handleCompleteClick}></input>
-					{title}
-				</span>
+		<li className="list-group-item">
+			<div className="d-flex justify-content-between align-items-center">
+				<input
+					type="checkbox"
+					className="me-3"
+					checked
+					onChange={handleCompleteClick}
+				></input>
+				<ModalTodo data={data} />
 			</div>
 		</li>
 	)
